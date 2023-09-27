@@ -1,0 +1,53 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+*.bin
+
+# testing
+/coverage
+/pages/test.js
+/components/devComp
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# docker
+docker-compose.yml
+
+# misc
+.DS_Store
+*.pem
+/assets/dummyData.json
+/backup
+release-template.md
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env
+.env*.local
+.vs
+service-account.json
+
+# vercel
+.vercel
+
+# PWA files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
+**/public/fallback-*.js
