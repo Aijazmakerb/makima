@@ -1,11 +1,11 @@
 {
-  "name": "moopa",
+  "name": "makima",
   "version": "4.1.2",
   "private": true,
-  "founder": "Factiven",
+  "founder": "graveYARD studios",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma generate && next build",
     "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"

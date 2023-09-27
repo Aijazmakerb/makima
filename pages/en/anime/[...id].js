@@ -19,6 +19,8 @@ import MobileNav from "@/components/shared/MobileNav";
 import Characters from "@/components/anime/charactersCard";
 import { redis } from "@/lib/redis";
 
+import axios from "axios";
+
 export default function Info({ info, color }) {
   const { data: session } = useSession();
   const { getUserLists } = useAniList(session);
@@ -84,6 +86,14 @@ export default function Info({ info, color }) {
     document.body.style.overflow = "auto";
   }
 
+  useEffect(() => {
+    function postData()
+    {
+      axios.get(`https://makima-mongo-api.vercel.app/save-data?table=details&id=${info.title.english || info.title.romaji}`);
+    }
+    postData();
+  },[])
+
   return (
     <>
       <Head>
@@ -103,7 +113,7 @@ export default function Info({ info, color }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`Moopa - ${info.title.romaji || info.title.english}`}
+          content={`Makima - ${info.title.romaji || info.title.english}`}
         />
         <meta
           name="twitter:description"

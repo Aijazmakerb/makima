@@ -30,7 +30,7 @@ export default function DetailTop({
       if (navigator.share) {
         await navigator.share({
           title: `Watch Now - ${info?.title?.english}`,
-          // text: `Watch [${info?.title?.romaji}] and more on Moopa. Join us for endless anime entertainment"`,
+          // text: `Watch [${info?.title?.romaji}] and more on Makima. Join us for endless anime entertainment"`,
           url: window.location.href,
         });
       } else {
