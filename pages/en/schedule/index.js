@@ -239,7 +239,7 @@ export default function Schedule({ schedule }) {
         <meta property="og:url" content="https://makima.live/en/schedule" />
         <meta
           property="og:image"
-          content="https://beta.moopa.live/preview.png"
+          content="https://makima.live/preview.png"
         />
         <meta
           property="og:image:alt"
@@ -252,7 +252,7 @@ export default function Schedule({ schedule }) {
         <meta name="twitter:creator" content="@makima_anime" /> */}
         <meta
           name="twitter:image"
-          content="https://beta.moopa.live/preview.png"
+          content="https://makima.live/preview.png"
         />
         <meta
           name="twitter:image:alt"
