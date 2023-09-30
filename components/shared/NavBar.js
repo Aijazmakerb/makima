@@ -48,7 +48,7 @@ export function NewNavbar({
   return (
     <>
       <nav
-        className={`${home ? "" : "fixed"} z-[200] top-0 px-5 w-full ${
+        className={`${home ? "" : "fixed"} absolute z-[999] top-0 w-full ${
           scrollPosition?.y >= scrollP
             ? home
               ? ""
@@ -60,7 +60,7 @@ export function NewNavbar({
       >
         <div
           className={`flex items-center justify-between mx-auto ${
-            home ? "lg:max-w-[90%] gap-10" : "max-w-screen-2xl"
+            home ? "lg:px-20 gap-10" : "max-w-screen-2xl"
           }`}
         >
           <div

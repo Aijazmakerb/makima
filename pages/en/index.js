@@ -19,6 +19,7 @@ import MobileNav from "@/components/shared/MobileNav";
 import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
+import { BookmarkIcon, PlayIcon, FaceSmileIcon, HeartIcon } from "@heroicons/react/24/outline";
 
 import axios from "axios";
 
@@ -295,12 +296,11 @@ export default function Home({ detail, populars, upComing }) {
   }, [sessions?.user?.name, currentAnime, plan]);
 
   useEffect(() => {
-    function postData()
-    {
+    function postData() {
       axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
     }
-    postData();
-  },[])
+    // postData();
+  }, [])
 
   return (
     <Fragment>
@@ -350,42 +350,33 @@ export default function Home({ detail, populars, upComing }) {
       <NewNavbar paddingY="pt-2 lg:pt-10" withNav={true} home={true} />
       <div className="h-auto w-screen bg-[#141519] text-[#dbdcdd]">
         {/* PC / TABLET */}
-        <div className=" hidden justify-center lg:flex my-16">
-          <div className="relative grid grid-rows-2 items-center lg:flex lg:h-[467px] lg:w-[80%] lg:justify-between">
-            <div className="row-start-2 flex h-full flex-col gap-7 lg:w-[55%] lg:justify-center">
-              <h1 className="w-[85%] font-outfit font-extrabold lg:text-[34px] line-clamp-2">
-                {data.title.english || data.title.romaji || data.title.native}
-              </h1>
-              <p
-                className="font-roboto font-light lg:text-[18px] line-clamp-5"
-                dangerouslySetInnerHTML={{ __html: data?.description }}
-              />
-
-              <div className="lg:pt-5 flex">
-                <Link
-                  href={`/en/anime/${data.id}`}
-                  className="rounded-sm p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
-                >
-                  START WATCHING
-                </Link>
-              </div>
-            </div>
-            <div className="z-10 row-start-1 flex justify-center ">
-              <div className="relative  lg:h-[467px] lg:w-[322px] lg:scale-100">
-                <div className="absolute bg-gradient-to-t from-[#141519] to-transparent lg:h-[467px] lg:w-[322px]" />
-
-                <Image
-                  draggable={false}
-                  src={data.coverImage?.extraLarge || data.image}
-                  alt={`cover ${data.title.english || data.title.romaji}`}
-                  width={1200}
-                  height={1200}
-                  priority
-                  className="rounded-tl-xl rounded-tr-xl object-cover bg-blend-overlay lg:h-[467px] lg:w-[322px]"
-                />
+        <div className=" hidden justify-center lg:flex aspect-video" style={{
+          backgroundImage: `url("https://static.crunchyroll.com/fms/landscape_large/94/png/b95570e7-f668-4a40-8d9f-4f5d192b8283.webp")`,
+          backgroundSize: "cover",
+        }}>
+          <div class="w-full px-20 z-[998]">
+            <div className="flex flex-col items-center justify-center h-screen mt-[-3rem]">
+              <div class="grid grid-cols-12">
+                <div class="aj-logo">
+                  <img src="https://static.crunchyroll.com/fms/logo/85/png/d2681064-7b85-4594-8e35-77b4a21b3dbb.webp" />
+                </div>
+                <div class="aj-text">
+                  <div className="mt-8 mb-2 text-sm font-medium flex gap-4">
+                    <span className="flex gap-2"><FaceSmileIcon className="w-5 h-5"/>86%</span>
+                    <span className="flex gap-2"><HeartIcon className="w-5 h-5"/>601</span>
+                    <span>Adventure • Drama • Fantasy</span>
+                  </div>
+                  <p className="line-clamp-4 mb-8">World peace is at stake, and secret agent Twilight must undergo his most difficult mission yet—pretend to be a family man. Posing as a loving husband and father, he’ll infiltrate an elite school to get close to a high-profile politician. He has the perfect cover, except his wife’s a deadly assassin, and neither knows each other’s identity. But someone does, his adopted daughter who’s a telepath!</p>
+                </div>
+                <div className="aj-button">
+                  <button className="bg-action px-16 uppercase py-2 text-black flex items-center font-semibold"><PlayIcon className="w-5 h-5 mr-2"/>Start watching</button>
+                  <button className="bg-action px-4 ml-4 text-black"><BookmarkIcon className="w-5 h-5" /></button>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="hero-background-overlay absolute aspect-video"></div>
         </div>
 
         {sessions && (
@@ -412,7 +403,7 @@ export default function Home({ detail, populars, upComing }) {
 
         <div className="lg:mt-16 mt-5 flex flex-col gap-5 items-center">
           <motion.div
-            className="w-screen flex-none lg:w-[87%]"
+            className="w-screen flex-none lg:px-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop
@@ -524,7 +515,7 @@ export default function Home({ detail, populars, upComing }) {
           </motion.div>
 
           <motion.div
-            className="w-screen flex-none lg:w-[87%]"
+            className="w-screen flex-none lg:px-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop
