@@ -351,14 +351,14 @@ export default function Home({ detail, populars, upComing }) {
       <div className="h-auto w-screen bg-[#141519] text-[#dbdcdd]">
         {/* PC / TABLET */}
         <div className=" hidden justify-center lg:flex aspect-video" style={{
-          backgroundImage: `url("https://static.crunchyroll.com/fms/landscape_large/94/png/b95570e7-f668-4a40-8d9f-4f5d192b8283.webp")`,
+          backgroundImage: `url("https://www.themoviedb.org/t/p/original/96L4DR7WyA8he2wcVcMeYIlantK.jpg")`,
           backgroundSize: "cover",
         }}>
           <div class="w-full px-20 z-[998]">
-            <div className="flex flex-col items-center justify-center h-screen mt-[-3rem]">
+            <div className="flex flex-col items-center justify-center h-screen">
               <div class="grid grid-cols-12">
                 <div class="aj-logo">
-                  <img src="https://static.crunchyroll.com/fms/logo/85/png/d2681064-7b85-4594-8e35-77b4a21b3dbb.webp" />
+                  <img src="https://static.crunchyroll.com/fms/logo/85/png/2f0f479f-e18f-4947-baa1-2cbf45cdda6d.webp" />
                 </div>
                 <div class="aj-text">
                   <div className="mt-8 mb-2 text-sm font-medium flex gap-4">
