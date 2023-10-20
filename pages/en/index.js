@@ -125,6 +125,7 @@ export default function Home({ detail, populars, upComing }) {
       try {
         const res = await fetch(`/api/v2/etc/schedule`);
         const data = await res.json();
+        console.log(res);
 
         if (!res.ok) {
           setSchedules(null);
