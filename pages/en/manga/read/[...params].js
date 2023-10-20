@@ -10,13 +10,22 @@ import { authOptions } from "../../../api/auth/[...nextauth]";
 import BottomBar from "@/components/manga/mobile/bottomBar";
 import TopBar from "@/components/manga/mobile/topBar";
 import Head from "next/head";
-import nookies from "nookies";
 import ShortCutModal from "@/components/manga/modals/shortcutModal";
 import ChapterModal from "@/components/manga/modals/chapterModal";
-import getAnifyPage from "@/lib/anify/page";
+import getConsumetPages from "@/lib/consumet/manga/getPage";
+import { mediaInfoQuery } from "@/lib/graphql/query";
+import { redis } from "@/lib/redis";
+import getConsumetChapters from "@/lib/consumet/manga/getChapters";
+import { toast } from "sonner";
 
-export default function Read({ data, currentId, sessions }) {
-  const [info, setInfo] = useState();
+export default function Read({
+  data,
+  info,
+  chaptersData,
+  currentId,
+  sessions,
+  provider,
+}) {
   const [chapter, setChapter] = useState([]);
   const [layout, setLayout] = useState(1);
 
@@ -41,16 +50,19 @@ export default function Read({ data, currentId, sessions }) {
   const router = useRouter();
 
   useEffect(() => {
-    hasRun.current = false;
-  }, [currentId]);
+    toast.message("This page is still under development", {
+      description: "If you found any bugs, please report it to us!",
+      position: "top-center",
+      duration: 10000,
+    });
+  }, []);
 
   useEffect(() => {
-    const get = JSON.parse(localStorage.getItem("manga"));
-    const chapters = get.manga;
+    hasRun.current = false;
+    const chapters = chaptersData.find((x) => x.providerId === provider);
     const currentChapter = chapters.chapters?.find((x) => x.id === currentId);
 
     setCurrentChapter(currentChapter);
-    setInfo(get.data);
     setChapter(chapters);
 
     if (Array.isArray(chapters?.chapters)) {
@@ -64,6 +76,8 @@ export default function Read({ data, currentId, sessions }) {
         setPrevChapterId(prevChapter ? prevChapter.id : null);
       }
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentId]);
 
   useEffect(() => {
@@ -99,6 +113,8 @@ export default function Read({ data, currentId, sessions }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextChapterId, prevChapterId, visible, isKeyOpen, paddingX]);
 
   return (
@@ -156,6 +172,7 @@ export default function Read({ data, currentId, sessions }) {
         {layout === 1 && (
           <FirstPanel
             aniId={info?.id}
+            providerId={provider}
             data={data}
             hasRun={hasRun}
             currentId={currentId}
@@ -177,6 +194,7 @@ export default function Read({ data, currentId, sessions }) {
           <SecondPanel
             aniId={info?.id}
             data={data}
+            chapterData={chapter}
             hasRun={hasRun}
             currentChapter={currentChapter}
             currentId={currentId}
@@ -185,12 +203,14 @@ export default function Read({ data, currentId, sessions }) {
             visible={visible}
             setVisible={setVisible}
             session={sessions}
+            providerId={provider}
           />
         )}
         {layout === 3 && (
           <ThirdPanel
             aniId={info?.id}
             data={data}
+            chapterData={chapter}
             hasRun={hasRun}
             currentId={currentId}
             currentChapter={currentChapter}
@@ -202,6 +222,7 @@ export default function Read({ data, currentId, sessions }) {
             scaleImg={scaleImg}
             setMobileVisible={setMobileVisible}
             mobileVisible={mobileVisible}
+            providerId={provider}
           />
         )}
         {visible && (
@@ -228,8 +249,6 @@ export default function Read({ data, currentId, sessions }) {
 }
 
 export async function getServerSideProps(context) {
-  const cookies = nookies.get(context);
-
   const key = process.env.API_KEY;
 
   const query = context.query;
@@ -237,17 +256,36 @@ export async function getServerSideProps(context) {
   const chapterId = query.chapterId;
   const mediaId = query.id;
 
-  if (!cookies.manga || cookies.manga !== mediaId) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  const accessToken = session?.user?.token || null;
+
+  const data = await getConsumetPages(mediaId, providerId, chapterId, key);
+  const chapters = await getConsumetChapters(mediaId, redis);
+
+  const response = await fetch("https://graphql.anilist.co/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    },
+    body: JSON.stringify({
+      query: mediaInfoQuery,
+      variables: {
+        id: parseInt(mediaId),
+        type: "MANGA",
+      },
+    }),
+  });
+  const json = await response.json();
+  const info = json?.data?.Media;
+
+  if (data?.length === 0) {
     return {
       redirect: {
-        destination: `/en/manga/${mediaId}`,
+        destination: `/en/manga/${mediaId}?chapter=404`,
       },
     };
   }
-
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  const data = await getAnifyPage(mediaId, providerId, chapterId, key);
 
   if (data.error) {
     return {
@@ -258,8 +296,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: data,
+      info: info,
+      chaptersData: chapters,
       currentId: chapterId,
       sessions: session,
+      provider: providerId,
     },
   };
 }

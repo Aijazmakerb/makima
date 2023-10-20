@@ -21,6 +21,7 @@ export default function Custom404() {
     } else if (lang === "id") {
       setLang("id");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

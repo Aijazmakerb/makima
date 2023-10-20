@@ -216,52 +216,52 @@ export default function Schedule({ schedule }) {
   return (
     <>
       <Head>
-        <title>Makima - Schedule</title>
+        <title>Moopa - Schedule</title>
         {/* write a meta with good seo for this page */}
         <meta
           name="description"
-          content="Makima is a website where you can find all the information about your favorite anime and manga."
+          content="Moopa is a website where you can find all the information about your favorite anime and manga."
         />
         <meta
           name="keywords"
-          content="anime, manga, makima, anilist, information, schedule, airing, next, currently, airing, anime, manga"
+          content="anime, manga, moopa, anilist, information, schedule, airing, next, currently, airing, anime, manga"
         />
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Makima" />
-        <meta name="url" content="https://makima.live/en/schedule" />
-        <meta name="og:title" property="og:title" content="Makima - Schedule" />
+        <meta name="author" content="Moopa Team" />
+        <meta name="url" content="https://moopa.live/en/schedule" />
+        <meta name="og:title" property="og:title" content="Moopa - Schedule" />
         <meta
           name="og:description"
           property="og:description"
-          content="Makima is a website where you can find all the information about your favorite anime and manga."
+          content="Moopa is a website where you can find all the information about your favorite anime and manga."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://makima.live/en/schedule" />
+        <meta property="og:url" content="https://moopa.live/en/schedule" />
         <meta
           property="og:image"
-          content="https://makima.live/preview.png"
+          content="https://beta.moopa.live/preview.png"
         />
         <meta
           property="og:image:alt"
-          content="Makima is a website where you can find all the information about your favorite anime and manga."
+          content="Moopa is a website where you can find all the information about your favorite anime and manga."
         />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Makima" />
+        <meta property="og:site_name" content="Moopa" />
         <meta name="twitter:card" content="summary_large_image" />
-        {/* <meta name="twitter:site" content="@makima_anime" />
-        <meta name="twitter:creator" content="@makima_anime" /> */}
+        {/* <meta name="twitter:site" content="@moopa_anime" />
+        <meta name="twitter:creator" content="@moopa_anime" /> */}
         <meta
           name="twitter:image"
-          content="https://makima.live/preview.png"
+          content="https://beta.moopa.live/preview.png"
         />
         <meta
           name="twitter:image:alt"
-          content="Makima is a website where you can find all the information about your favorite anime and manga."
+          content="Moopa is a website where you can find all the information about your favorite anime and manga."
         />
-        <meta name="twitter:title" content="Makima - Schedule" />
+        <meta name="twitter:title" content="Moopa - Schedule" />
         <meta
           name="twitter:description"
-          content="Makima is a website where you can find all the information about your favorite anime and manga."
+          content="Moopa is a website where you can find all the information about your favorite anime and manga."
         />
       </Head>
       <MobileNav sessions={session} hideProfile={true} />

@@ -20,8 +20,6 @@ import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
 
-import axios from "axios";
-
 export async function getServerSideProps() {
   let cachedData;
 
@@ -120,24 +118,23 @@ export default function Home({ detail, populars, upComing }) {
     }
   }, [upComing]);
 
-  useEffect(() => {
-    const getSchedule = async () => {
-      try {
-        const res = await fetch(`/api/v2/etc/schedule`);
-        const data = await res.json();
-        console.log(res);
+  // useEffect(() => {
+  //   const getSchedule = async () => {
+  //     try {
+  //       const res = await fetch(`/api/v2/etc/schedule`);
+  //       const data = await res.json();
 
-        if (!res.ok) {
-          setSchedules(null);
-        } else {
-          setSchedules(data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getSchedule();
-  }, []);
+  //       if (!res.ok) {
+  //         setSchedules(null);
+  //       } else {
+  //         setSchedules(data);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getSchedule();
+  // }, []);
 
   const [releaseData, setReleaseData] = useState([]);
 
@@ -293,28 +290,24 @@ export default function Home({ detail, populars, upComing }) {
       }
     }
     userData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions?.user?.name, currentAnime, plan]);
 
-  useEffect(() => {
-    function postData()
-    {
-      axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
-    }
-    postData();
-  },[])
+  // console.log({ recentAdded });
 
   return (
     <Fragment>
       <Head>
-        <title>Makima</title>
+        <title>Moopa</title>
         <meta charSet="UTF-8"></meta>
         <link rel="icon" href="/svg/c.svg" />
-        <link rel="canonical" href="https://makima.live/en/" />
+        <link rel="canonical" href="https://moopa.live/en/" />
         <meta name="twitter:card" content="summary_large_image" />
         {/* Write the best SEO for this homepage */}
         <meta
           name="description"
-          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
+          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
         />
         <meta
           name="keywords"
@@ -324,25 +317,25 @@ export default function Home({ detail, populars, upComing }) {
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://makima.live/" />
+        <meta property="og:url" content="https://moopa.live/" />
         <meta
           property="og:title"
-          content="Makima - Free Anime and Manga Streaming"
+          content="Moopa - Free Anime and Manga Streaming"
         />
         <meta
           property="og:description"
-          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
+          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
         />
         <meta property="og:image" content="/preview.png" />
-        <meta property="og:site_name" content="Makima" />
+        <meta property="og:site_name" content="Moopa" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Makima - Free Anime and Manga Streaming"
+          content="Moopa - Free Anime and Manga Streaming"
         />
         <meta
           name="twitter:description"
-          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
+          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
         />
         <meta name="twitter:image" content="/preview.png" />
       </Head>
@@ -365,7 +358,7 @@ export default function Home({ detail, populars, upComing }) {
               <div className="lg:pt-5 flex">
                 <Link
                   href={`/en/anime/${data.id}`}
-                  className="rounded-lg p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
+                  className="rounded-sm p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
                 >
                   START WATCHING
                 </Link>
@@ -411,9 +404,9 @@ export default function Home({ detail, populars, upComing }) {
           </div>
         )}
 
-        <div className="lg:mt-16 mt-5 flex flex-col gap-5 items-center">
+        <div className="lg:mt-16 mt-5 flex flex-col items-center">
           <motion.div
-            className="w-screen flex-none lg:w-[87%]"
+            className="w-screen flex-none lg:w-[95%] xl:w-[87%]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop
@@ -525,7 +518,7 @@ export default function Home({ detail, populars, upComing }) {
           </motion.div>
 
           <motion.div
-            className="w-screen flex-none lg:w-[87%]"
+            className="w-screen flex-none lg:w-[95%] xl:w-[87%]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop

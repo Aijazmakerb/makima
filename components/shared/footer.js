@@ -28,6 +28,8 @@ function Footer() {
       setLang("id");
       setChecked(true);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function switchLang() {
@@ -57,7 +59,7 @@ function Footer() {
                 height={100}
                 className="w-10 h-10"
               /> */}
-            <div className="flex gap-2 font-outfit text-4xl">makima</div>
+            <div className="flex gap-2 font-outfit text-4xl">moopa</div>
             <p className="font-karla lg:text-[0.8rem] text-[0.65rem] text-[#9c9c9c]  lg:w-[520px] italic">
               This site does not store any files on our server, we only linked
               to the media which is hosted on 3rd party services.
@@ -97,7 +99,7 @@ function Footer() {
                   <Link href={`/${lang}/dmca`}>DMCA</Link>
                 </li>
                 <li className="cursor-pointer hover:text-action">
-                  <Link href="https://github.com/Aijazmakerb/makima.git">
+                  <Link href="https://github.com/DevanAbinaya/Ani-Moopa">
                     Github
                   </Link>
                 </li>
@@ -109,13 +111,13 @@ function Footer() {
       <div className="bg-tersier border-t border-white/5">
         <div className="mx-auto flex w-[90%] lg:w-[95%] xl:w-[80%] flex-col pb-6 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:py-0">
           <p className="flex items-center gap-1 font-karla lg:text-[0.81rem] text-[0.7rem] text-[#CCCCCC] py-3">
-            &copy; {new Date().getFullYear()} makima.live | Website Made by{" "}
-            <span className="text-white font-bold">graveYARD studios</span>
+            &copy; {new Date().getFullYear()} moopa.live | Website Made by{" "}
+            <span className="text-white font-bold">Factiven</span>
           </p>
           <div className="flex items-center gap-5">
             {/* Github Icon */}
             <Link
-              href="https://github.com/Aijazmakerb/makimaa"
+              href="https://github.com/Ani-Moopa/Moopa"
               className="w-5 h-5 hover:opacity-75"
             >
               <svg
@@ -141,17 +143,17 @@ function Footer() {
             </Link>
             {/* Discord Icon */}
             <Link
-              href="https://www.instagram.com/makima.live/"
+              href="https://discord.gg/v5fjSdKwr2"
               className="w-6 h-6 hover:opacity-75"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid"
-                viewBox="0 0 24 24"
+                viewBox="0 -28.5 256 256"
               >
                 <path
                   fill="#fff"
-                  d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"
+                  d="M216.856 16.597A208.502 208.502 0 00164.042 0c-2.275 4.113-4.933 9.645-6.766 14.046-19.692-2.961-39.203-2.961-58.533 0-1.832-4.4-4.55-9.933-6.846-14.046a207.809 207.809 0 00-52.855 16.638C5.618 67.147-3.443 116.4 1.087 164.956c22.169 16.555 43.653 26.612 64.775 33.193A161.094 161.094 0 0079.735 175.3a136.413 136.413 0 01-21.846-10.632 108.636 108.636 0 005.356-4.237c42.122 19.702 87.89 19.702 129.51 0a131.66 131.66 0 005.355 4.237 136.07 136.07 0 01-21.886 10.653c4.006 8.02 8.638 15.67 13.873 22.848 21.142-6.58 42.646-16.637 64.815-33.213 5.316-56.288-9.08-105.09-38.056-148.36zM85.474 135.095c-12.645 0-23.015-11.805-23.015-26.18s10.149-26.2 23.015-26.2c12.867 0 23.236 11.804 23.015 26.2.02 14.375-10.148 26.18-23.015 26.18zm85.051 0c-12.645 0-23.014-11.805-23.014-26.18s10.148-26.2 23.014-26.2c12.867 0 23.236 11.804 23.015 26.2 0 14.375-10.148 26.18-23.015 26.18z"
                 ></path>
               </svg>
             </Link>

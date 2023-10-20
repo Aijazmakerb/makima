@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useAniList } from "../../../lib/anilist/useAnilist";
+import { getHeaders, getRandomId } from "@/utils/imageUtils";
 
 export default function FirstPanel({
   aniId,
@@ -26,6 +27,7 @@ export default function FirstPanel({
   mobileVisible,
   setMobileVisible,
   setCurrentPage,
+  providerId,
 }) {
   const { markProgress } = useAniList(session);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -59,7 +61,10 @@ export default function FirstPanel({
             (x) => x.id === currentId
           );
           if (currentChapter) {
-            markProgress(aniId, currentChapter.number);
+            const chapterNumber =
+              currentChapter.number ??
+              chapter.chapters.indexOf(currentChapter) + 1;
+            markProgress(aniId, chapterNumber);
             console.log("marking progress");
           }
         }
@@ -82,6 +87,8 @@ export default function FirstPanel({
         });
       }
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, session, chapter]);
 
   useEffect(() => {
@@ -119,17 +126,21 @@ export default function FirstPanel({
         {data && Array.isArray(data) && data?.length > 0 ? (
           data.map((i, index) => (
             <div
-              key={i.url}
+              key={getRandomId()}
               className="w-screen lg:h-auto lg:w-full"
               ref={(el) => (imageRefs.current[index] = el)}
             >
               <Image
                 src={`https://api.consumet.org/utils/image-proxy?url=${encodeURIComponent(
-                  i.url
-                )}&headers=${encodeURIComponent(
-                  JSON.stringify({ Referer: i.headers.Referer })
-                )}`}
-                alt={i.index}
+                  i.img
+                )}${
+                  getHeaders(providerId)
+                    ? `&headers=${encodeURIComponent(
+                        JSON.stringify(getHeaders(providerId))
+                      )}`
+                    : ""
+                }`}
+                alt={index}
                 width={500}
                 height={500}
                 onClick={() => setMobileVisible(!mobileVisible)}

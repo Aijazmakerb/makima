@@ -97,11 +97,11 @@ export default function PopularAnime({ sessions }) {
   return (
     <Fragment>
       <Head>
-        <title>Makima - Popular Anime</title>
+        <title>Moopa - Popular Anime</title>
         <meta name="title" content="Popular Anime" />
         <meta
           name="description"
-          content="Explore Beloved Classics and Favorites - Dive into a curated collection of timeless anime on Makima's Popular Anime Page. From iconic classics to all-time favorites, experience the stories that have captured hearts worldwide. Start streaming now and relive the magic of anime!"
+          content="Explore Beloved Classics and Favorites - Dive into a curated collection of timeless anime on Moopa's Popular Anime Page. From iconic classics to all-time favorites, experience the stories that have captured hearts worldwide. Start streaming now and relive the magic of anime!"
         />
       </Head>
       <MobileNav sessions={sessions} />

@@ -17,8 +17,6 @@ import BugReportForm from "@/components/shared/bugReport";
 import Skeleton from "react-loading-skeleton";
 import Head from "next/head";
 
-import axios from "axios";
-
 export async function getServerSideProps(context) {
   let userData = null;
   const session = await getServerSession(context.req, context.res, authOptions);
@@ -116,7 +114,7 @@ export async function getServerSideProps(context) {
       epiNumber: epiNumber || null,
       dub: dub || null,
       userData: userData?.[0] || null,
-      info: data.data.Media || null,
+      info: data?.data?.Media || null,
       proxy,
       disqus,
     },
@@ -181,9 +179,10 @@ export default function Watch({
 
       if (episodes) {
         const getProvider = episodes?.find((i) => i.providerId === provider);
-        const episodeList = dub
-          ? getProvider?.episodes?.filter((x) => x.hasDub === true)
-          : getProvider?.episodes.slice(0, getMap?.episodes.length);
+        const episodeList = getProvider?.episodes.slice(
+          0,
+          getMap?.episodes.length
+        );
         const playingData = getMap?.episodes.find(
           (i) => i.number === Number(epiNumber)
         );
@@ -221,6 +220,7 @@ export default function Watch({
     return () => {
       setEpisodeNavigation(null);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions?.user?.name, epiNumber, dub]);
 
   useEffect(() => {
@@ -289,6 +289,8 @@ export default function Watch({
       });
       setMarked(0);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider, watchId, info?.id]);
 
   useEffect(() => {
@@ -305,7 +307,7 @@ export default function Watch({
 
     mediaSession.metadata = new MediaMetadata({
       title: title,
-      artist: `Makima ${
+      artist: `Moopa ${
         title === info?.title?.romaji
           ? "- Episode " + epiNumber
           : `- ${info?.title?.romaji || info?.title?.english}`
@@ -319,7 +321,7 @@ export default function Watch({
       if (navigator.share) {
         await navigator.share({
           title: `Watch Now - ${info?.title?.english || info.title.romaji}`,
-          // text: `Watch [${info?.title?.romaji}] and more on Makima. Join us for endless anime entertainment"`,
+          // text: `Watch [${info?.title?.romaji}] and more on Moopa. Join us for endless anime entertainment"`,
           url: window.location.href,
         });
       } else {
@@ -340,16 +342,6 @@ export default function Watch({
     setOpen(false);
     document.body.style.overflow = "auto";
   }
-
-  useEffect(() => {
-    function postData()
-    {
-      if(info){
-        axios.get(`https://makima-mongo-api.vercel.app/save-data?table=player&id=${info.title.romaji || info.title.english} Episode: ${epiNumber}`)
-      }
-    }
-    postData();
-  },[info])
 
   return (
     <>
@@ -387,7 +379,7 @@ export default function Watch({
           property="og:image"
           content={episodeNavigation?.playing?.img || info?.bannerImage}
         />
-        <meta property="og:site_name" content="Makima" />
+        <meta property="og:site_name" content="Moopa" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:image"
@@ -454,7 +446,7 @@ export default function Watch({
           <div
             id="default"
             className={`${
-              theaterMode ? "lg:max-w-[80%]" : "lg:max-w-[95%]"
+              theaterMode ? "lg:max-w-[95%] xl:max-w-[80%]" : "lg:max-w-[95%]"
             } w-full flex flex-col lg:flex-row mx-auto`}
           >
             <div id="primary" className="w-full">
@@ -536,7 +528,7 @@ export default function Watch({
             </div>
             <div
               id="secondary"
-              className={`relative ${theaterMode ? "pt-2" : ""}`}
+              className={`relative ${theaterMode ? "pt-5" : "pt-4 lg:pt-0"}`}
             >
               <EpisodeLists
                 info={info}
@@ -546,6 +538,7 @@ export default function Watch({
                 watchId={watchId}
                 episode={episodesList}
                 artStorage={artStorage}
+                track={episodeNavigation}
                 dub={dub}
               />
             </div>

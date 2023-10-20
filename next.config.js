@@ -11,7 +11,6 @@ const withPWA = require("next-pwa")({
 module.exports = withPWA({
   reactStrictMode: false,
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -24,6 +23,10 @@ module.exports = withPWA({
       {
         protocol: "https",
         hostname: "simkl.in",
+      },
+      {
+        protocol: "https",
+        hostname: "tenor.com",
       },
     ],
   },

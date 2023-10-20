@@ -5,8 +5,8 @@ import Link from "next/link";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { getUser } from "@/prisma/user";
-import { toast } from "react-toastify";
 import { NewNavbar } from "@/components/shared/NavBar";
+import { toast } from "sonner";
 
 export default function MyList({ media, sessions, user, time, userSettings }) {
   const [listFilter, setListFilter] = useState("all");
@@ -154,7 +154,7 @@ export default function MyList({ media, sessions, user, time, userSettings }) {
               <div className="flex p-2 items-center justify-between">
                 <h2
                   className="text-sm text-white/70"
-                  title="Disabling this will stop adding your Anime to 'Watched using Makima' list."
+                  title="Disabling this will stop adding your Anime to 'Watched using Moopa' list."
                 >
                   Custom Lists
                 </h2>

@@ -7,16 +7,16 @@ export default function Home() {
       <Head>
         <meta
           name="twitter:title"
-          content="Makima - Free Anime and Manga Streaming"
+          content="Moopa - Free Anime and Manga Streaming"
         />
         <meta
           name="twitter:description"
-          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
+          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
         />
         <meta name="twitter:image" content="/preview.png" />
         <meta
           name="description"
-          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
+          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
         />
       </Head>
     </>

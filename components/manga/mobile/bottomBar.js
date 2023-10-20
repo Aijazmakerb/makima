@@ -100,10 +100,17 @@ export default function BottomBar({
                     >
                       <Image
                         src={`https://api.consumet.org/utils/image-proxy?url=${encodeURIComponent(
-                          x.url
-                        )}&headers=${encodeURIComponent(
-                          JSON.stringify({ Referer: x.headers.Referer })
-                        )}`}
+                          x.img
+                        )}${
+                          getHeaders(data.providerId)
+                            ? `&headers=${encodeURIComponent(
+                                JSON.stringify(getHeaders(data.providerId))
+                              )}`
+                            : ""
+                        }`}
+                        // &headers=${encodeURIComponent(
+                        //   JSON.stringify({ Referer: x.headers.Referer })
+                        // )}
                         alt="chapter image"
                         width={100}
                         height={200}

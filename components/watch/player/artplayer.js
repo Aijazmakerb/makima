@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import Artplayer from "artplayer";
 import Hls from "hls.js";
 import { useWatchProvider } from "@/lib/context/watchPageProvider";
-import { seekBackward, seekForward } from "./component/overlay";
 import artplayerPluginHlsQuality from "artplayer-plugin-hls-quality";
 
 export default function NewPlayer({
@@ -38,6 +37,8 @@ export default function NewPlayer({
   }
 
   useEffect(() => {
+    Artplayer.PLAYBACK_RATE = [0.5, 0.75, 1, 1.15, 1.2, 1.5, 1.7, 2];
+
     const art = new Artplayer({
       ...option,
       container: artRef.current,
@@ -45,7 +46,7 @@ export default function NewPlayer({
       customType: {
         m3u8: playM3u8,
       },
-      ...(provider === "zoro" && {
+      ...(subtitles?.length > 0 && {
         subtitle: {
           url: `${defSub}`,
           // type: "vtt",
@@ -130,7 +131,7 @@ export default function NewPlayer({
             return item.html;
           },
         },
-        provider === "zoro" && {
+        subtitles?.length > 0 && {
           html: "Subtitles",
           icon: '<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="M4 20q-.825 0-1.413-.588T2 18V6q0-.825.588-1.413T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.588 1.413T20 20H4Zm2-4h8v-2H6v2Zm10 0h2v-2h-2v2ZM6 12h2v-2H6v2Zm4 0h8v-2h-8v2Z"></path></svg>',
           width: 300,
@@ -260,7 +261,7 @@ export default function NewPlayer({
           index: 11,
           position: "right",
           tooltip: "Theater (t)",
-          html: '<p class="theater"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20"><path fill="currentColor" d="M19 3H1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 12H2V5h16v10z"></path></svg></p>',
+          html: '<i class="theater"><svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20"><path fill="currentColor" d="M19 3H1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 12H2V5h16v10z"></path></svg></i>',
           click: function (...args) {
             setPlayerState((prev) => ({
               ...prev,
@@ -270,8 +271,26 @@ export default function NewPlayer({
             setTheaterMode((prev) => !prev);
           },
         },
-        seekBackward,
-        seekForward,
+        {
+          index: 10,
+          name: "fast-rewind",
+          position: "left",
+          html: '<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20"><path fill="currentColor" d="M17.959 4.571L10.756 9.52s-.279.201-.279.481s.279.479.279.479l7.203 4.951c.572.38 1.041.099 1.041-.626V5.196c0-.727-.469-1.008-1.041-.625zm-9.076 0L1.68 9.52s-.279.201-.279.481s.279.479.279.479l7.203 4.951c.572.381 1.041.1 1.041-.625v-9.61c0-.727-.469-1.008-1.041-.625z"></path></svg>',
+          tooltip: "Backward 5s",
+          click: function () {
+            art.backward = 5;
+          },
+        },
+        {
+          index: 11,
+          name: "fast-forward",
+          position: "left",
+          html: '<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20"><path fill="currentColor" d="M9.244 9.52L2.041 4.571C1.469 4.188 1 4.469 1 5.196v9.609c0 .725.469 1.006 1.041.625l7.203-4.951s.279-.199.279-.478c0-.28-.279-.481-.279-.481zm9.356.481c0 .279-.279.478-.279.478l-7.203 4.951c-.572.381-1.041.1-1.041-.625V5.196c0-.727.469-1.008 1.041-.625L18.32 9.52s.28.201.28.481z"></path></svg>',
+          tooltip: "Forward 5s",
+          click: function () {
+            art.forward = 5;
+          },
+        },
       ],
     });
 
@@ -360,6 +379,8 @@ export default function NewPlayer({
         art.destroy(false);
       }
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div ref={artRef} {...rest}></div>;

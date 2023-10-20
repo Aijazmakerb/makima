@@ -19,8 +19,6 @@ import MobileNav from "@/components/shared/MobileNav";
 import Characters from "@/components/anime/charactersCard";
 import { redis } from "@/lib/redis";
 
-import axios from "axios";
-
 export default function Info({ info, color }) {
   const { data: session } = useSession();
   const { getUserLists } = useAniList(session);
@@ -74,6 +72,8 @@ export default function Info({ info, color }) {
       }
     }
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, info, session?.user?.name]);
 
   function handleOpen() {
@@ -85,14 +85,6 @@ export default function Info({ info, color }) {
     setOpen(false);
     document.body.style.overflow = "auto";
   }
-
-  useEffect(() => {
-    function postData()
-    {
-      axios.get(`https://makima-mongo-api.vercel.app/save-data?table=details&id=${info.title.english || info.title.romaji}`);
-    }
-    postData();
-  },[])
 
   return (
     <>
@@ -113,7 +105,7 @@ export default function Info({ info, color }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`Makima - ${info.title.romaji || info.title.english}`}
+          content={`Moopa - ${info.title.romaji || info.title.english}`}
         />
         <meta
           name="twitter:description"
@@ -153,7 +145,7 @@ export default function Info({ info, color }) {
               stats={statuses?.value}
               prg={progress}
               max={info?.episodes}
-              image={info}
+              info={info}
               close={handleClose}
             />
           )}

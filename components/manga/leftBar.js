@@ -1,3 +1,4 @@
+import { getHeaders, getRandomId } from "@/utils/imageUtils";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,6 @@ export function LeftBar({ data, page, info, currentId, setSeekPage }) {
   function goBack() {
     router.push(`/en/manga/${info.id}`);
   }
-  // console.log(info);
   return (
     <div className="hidden lg:block shrink-0 w-[16rem] h-screen overflow-y-auto scrollbar-none bg-secondary relative group">
       <div className="grid">
@@ -37,10 +37,10 @@ export function LeftBar({ data, page, info, currentId, setSeekPage }) {
             <h1 className="font-bold xl:text-lg">Chapters</h1>
             <div className="px-2">
               <div className="w-full text-sm xl:text-base px-1 h-[8rem] xl:h-[30vh] bg-[#161617] rounded-md overflow-auto scrollbar-thin scrollbar-thumb-[#363639] scrollbar-thumb-rounded-md hover:scrollbar-thumb-[#424245]">
-                {data?.chapters?.map((x) => {
+                {data?.chapters?.map((x, index) => {
                   return (
                     <div
-                      key={x.id}
+                      key={getRandomId()}
                       className={`${
                         x.id === currentId && "text-action"
                       } py-1 px-2 hover:bg-[#424245] rounded-sm`}
@@ -52,8 +52,10 @@ export function LeftBar({ data, page, info, currentId, setSeekPage }) {
                         className=""
                       >
                         <h1 className="line-clamp-1">
-                          <span className="font-bold">{x.number}.</span>{" "}
-                          {x.title}
+                          <span className="font-bold">
+                            {x.chapterNumber || index + 1}.
+                          </span>{" "}
+                          {x.title || `Chapter ${x.chapterNumber || index + 1}`}
                         </h1>
                       </Link>
                     </div>
@@ -69,28 +71,37 @@ export function LeftBar({ data, page, info, currentId, setSeekPage }) {
               <div className="text-center w-full px-1 h-[30vh] bg-[#161617] rounded-md overflow-auto scrollbar-thin scrollbar-thumb-[#363639] scrollbar-thumb-rounded-md hover:scrollbar-thumb-[#424245]">
                 {Array.isArray(page) ? (
                   <div className="grid grid-cols-2 gap-5 py-4 px-2 place-items-center">
-                    {page?.map((x) => {
+                    {page?.map((x, index) => {
                       return (
                         <div
-                          key={x.url}
+                          key={getRandomId()}
                           className="hover:bg-[#424245] cursor-pointer rounded-sm w-full"
                         >
                           <div
                             className="flex flex-col items-center cursor-pointer"
-                            onClick={() => setSeekPage(x.index)}
+                            onClick={() => setSeekPage(index)}
                           >
                             <Image
                               src={`https://api.consumet.org/utils/image-proxy?url=${encodeURIComponent(
-                                x.url
-                              )}&headers=${encodeURIComponent(
-                                JSON.stringify({ Referer: x.headers.Referer })
-                              )}`}
+                                x.img
+                              )}${
+                                getHeaders(data.providerId)
+                                  ? `&headers=${encodeURIComponent(
+                                      JSON.stringify(
+                                        getHeaders(data.providerId)
+                                      )
+                                    )}`
+                                  : ""
+                              }`}
+                              // &headers=${encodeURIComponent(
+                              //   JSON.stringify({ Referer: x.headers.Referer })
+                              // )}
                               alt="chapter image"
                               width={100}
                               height={200}
                               className="w-full h-[120px] object-contain scale-90"
                             />
-                            <h1>Page {x.index + 1}</h1>
+                            <h1>Page {index + 1}</h1>
                           </div>
                         </div>
                       );

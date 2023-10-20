@@ -4,9 +4,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { useAniList } from "../../lib/anilist/useAnilist";
-import { toast } from "react-toastify";
 import AniList from "../media/aniList";
 import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function RightBar({
   id,
@@ -47,15 +47,7 @@ export default function RightBar({
         markProgress(id, progress, status, volumeProgress);
         hasRun.current = true;
       } else {
-        toast.error("Progress must be a whole number!", {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "colored",
-        });
+        toast.error("Progress must be a whole number!");
       }
     }
   };

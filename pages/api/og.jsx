@@ -69,7 +69,7 @@ export default async function handler(request) {
               filter: "brightness(100%)",
             }}
           >
-            makima
+            moopa
           </span>
           <h1
             style={{
