@@ -20,6 +20,8 @@ import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
 
+import axios from "axios";
+
 export async function getServerSideProps() {
   let cachedData;
 
@@ -290,11 +292,15 @@ export default function Home({ detail, populars, upComing }) {
       }
     }
     userData();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions?.user?.name, currentAnime, plan]);
 
-  // console.log({ recentAdded });
+  useEffect(() => {
+    function postData()
+    {
+      axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
+    }
+    postData();
+  },[])
 
   return (
     <Fragment>

@@ -17,6 +17,8 @@ import BugReportForm from "@/components/shared/bugReport";
 import Skeleton from "react-loading-skeleton";
 import Head from "next/head";
 
+import axios from "axios";
+
 export async function getServerSideProps(context) {
   let userData = null;
   const session = await getServerSession(context.req, context.res, authOptions);
@@ -342,6 +344,16 @@ export default function Watch({
     setOpen(false);
     document.body.style.overflow = "auto";
   }
+
+  useEffect(() => {
+    function postData()
+    {
+      if(info){
+        axios.get(`https://makima-mongo-api.vercel.app/save-data?table=player&id=${info.title.romaji || info.title.english} Episode: ${epiNumber}`)
+      }
+    }
+    postData();
+  },[info])
 
   return (
     <>
