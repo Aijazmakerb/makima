@@ -307,7 +307,7 @@ export default function Watch({
 
     mediaSession.metadata = new MediaMetadata({
       title: title,
-      artist: `Moopa ${
+      artist: `Makima ${
         title === info?.title?.romaji
           ? "- Episode " + epiNumber
           : `- ${info?.title?.romaji || info?.title?.english}`
@@ -321,7 +321,7 @@ export default function Watch({
       if (navigator.share) {
         await navigator.share({
           title: `Watch Now - ${info?.title?.english || info.title.romaji}`,
-          // text: `Watch [${info?.title?.romaji}] and more on Moopa. Join us for endless anime entertainment"`,
+          // text: `Watch [${info?.title?.romaji}] and more on Makima. Join us for endless anime entertainment"`,
           url: window.location.href,
         });
       } else {
@@ -379,7 +379,7 @@ export default function Watch({
           property="og:image"
           content={episodeNavigation?.playing?.img || info?.bannerImage}
         />
-        <meta property="og:site_name" content="Moopa" />
+        <meta property="og:site_name" content="Makima" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:image"

@@ -102,7 +102,7 @@ export function NewNavbar({
                   home ? "text-4xl text-action" : "text-white text-3xl"
                 }`}
               >
-                moopa
+                makima
               </Link>
             )}
           </div>

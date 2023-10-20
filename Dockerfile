@@ -3,7 +3,7 @@ FROM node:20-alpine AS base
 FROM base AS deps
 RUN apk add --no-cache libc6-compat git
 WORKDIR /app
-RUN git clone https://github.com/Ani-Moopa/Moopa.git .
+RUN git clone https://github.com/Aijazmakerb/makima.git .
 RUN rm -rf .git .gitignore .vscode LICENSE.md README.md
 RUN npm install --verbose
 

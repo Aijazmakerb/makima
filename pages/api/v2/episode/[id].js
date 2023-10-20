@@ -232,7 +232,9 @@ export default async function handler(req, res) {
     if (meta) {
       data = await appendMetaToEpisodes(filteredData, JSON.parse(meta));
     } else if (cover && !cover.some((e) => e.img === null)) {
-      await redis.set(`meta:${id}`, JSON.stringify(cover));
+      if(redis){
+        await redis.set(`meta:${id}`, JSON.stringify(cover));
+      }
       data = await appendMetaToEpisodes(filteredData, cover);
     }
 

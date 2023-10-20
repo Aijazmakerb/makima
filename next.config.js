@@ -11,6 +11,7 @@ const withPWA = require("next-pwa")({
 module.exports = withPWA({
   reactStrictMode: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -52,7 +53,7 @@ module.exports = withPWA({
   //         { key: "Access-Control-Allow-Credentials", value: "true" },
   //         {
   //           key: "Access-Control-Allow-Origin",
-  //           value: "https://moopa.live",
+  //           value: "https://makima.live",
   //         }, // replace this your actual origin
   //         {
   //           key: "Access-Control-Allow-Methods",
@@ -77,7 +78,7 @@ module.exports = withPWA({
   //         "webpack://*",
   //         "https://graphql.anilist.co/",
   //         "https://api.aniskip.com/",
-  //         "https://m3u8proxy.moopa.workers.dev/",
+  //         "https://m3u8proxy.makima.workers.dev/",
   //       ],
   //       "default-src": "'self'",
   //       "font-src": [
@@ -94,7 +95,7 @@ module.exports = withPWA({
   //         "data:",
   //         "https://media.kitsu.io",
   //         "https://artworks.thetvdb.com",
-  //         "https://img.moopa.live",
+  //         "https://img.makima.live",
   //         "https://meo.comick.pictures",
   //         "https://kitsu-production-media.s3.us-west-002.backblazeb2.com",
   //       ],

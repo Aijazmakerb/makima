@@ -118,23 +118,23 @@ export default function Home({ detail, populars, upComing }) {
     }
   }, [upComing]);
 
-  // useEffect(() => {
-  //   const getSchedule = async () => {
-  //     try {
-  //       const res = await fetch(`/api/v2/etc/schedule`);
-  //       const data = await res.json();
+  useEffect(() => {
+    const getSchedule = async () => {
+      try {
+        const res = await fetch(`/api/v2/etc/schedule`);
+        const data = await res.json();
 
-  //       if (!res.ok) {
-  //         setSchedules(null);
-  //       } else {
-  //         setSchedules(data);
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getSchedule();
-  // }, []);
+        if (!res.ok) {
+          setSchedules(null);
+        } else {
+          setSchedules(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSchedule();
+  }, []);
 
   const [releaseData, setReleaseData] = useState([]);
 
@@ -299,15 +299,15 @@ export default function Home({ detail, populars, upComing }) {
   return (
     <Fragment>
       <Head>
-        <title>Moopa</title>
+        <title>Makima</title>
         <meta charSet="UTF-8"></meta>
         <link rel="icon" href="/svg/c.svg" />
-        <link rel="canonical" href="https://moopa.live/en/" />
+        <link rel="canonical" href="https://makima.live/en/" />
         <meta name="twitter:card" content="summary_large_image" />
         {/* Write the best SEO for this homepage */}
         <meta
           name="description"
-          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
+          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
         />
         <meta
           name="keywords"
@@ -317,25 +317,25 @@ export default function Home({ detail, populars, upComing }) {
         <meta name="robots" content="index, follow" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://moopa.live/" />
+        <meta property="og:url" content="https://makima.live/" />
         <meta
           property="og:title"
-          content="Moopa - Free Anime and Manga Streaming"
+          content="Makima - Free Anime and Manga Streaming"
         />
         <meta
           property="og:description"
-          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
+          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
         />
         <meta property="og:image" content="/preview.png" />
-        <meta property="og:site_name" content="Moopa" />
+        <meta property="og:site_name" content="Makima" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Moopa - Free Anime and Manga Streaming"
+          content="Makima - Free Anime and Manga Streaming"
         />
         <meta
           name="twitter:description"
-          content="Discover your new favorite anime or manga title! Moopa offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Moopa today!"
+          content="Discover your new favorite anime or manga title! Makima offers a vast library of high-quality content, accessible on multiple devices and without any interruptions. Start using Makima today!"
         />
         <meta name="twitter:image" content="/preview.png" />
       </Head>

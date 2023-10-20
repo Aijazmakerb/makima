@@ -1,8 +1,8 @@
 {
-  "name": "moopa",
+  "name": "makima",
   "version": "4.1.4",
   "private": true,
-  "founder": "Factiven",
+  "founder": "graveYARD studios",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
