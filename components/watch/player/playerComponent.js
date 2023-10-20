@@ -177,7 +177,7 @@ export default function PlayerComponent({
    */
   function getInstance(art) {
     art.on("ready", () => {
-      const autoplay = localStorage.getItem("autoplay_video") || false;
+      const autoplay = localStorage.getItem("autoplay_video") || true;
 
       // check media queries for mobile devices
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
