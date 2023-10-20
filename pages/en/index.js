@@ -364,7 +364,7 @@ export default function Home({ detail, populars, upComing }) {
               <div className="lg:pt-5 flex">
                 <Link
                   href={`/en/anime/${data.id}`}
-                  className="rounded-sm p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
+                  className="rounded-lg p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
                 >
                   START WATCHING
                 </Link>
