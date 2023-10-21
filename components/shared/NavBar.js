@@ -48,7 +48,7 @@ export function NewNavbar({
   return (
     <>
       <nav
-        className={`${home ? "" : "fixed"} z-[200] top-0 px-5 w-full ${
+        className={`${home ? "" : "fixed"} z-[200] top-0 px-5 w-full absolute ${
           scrollPosition?.y >= scrollP
             ? home
               ? ""

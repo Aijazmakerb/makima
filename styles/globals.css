@@ -557,3 +557,8 @@ pre code {
     left: unset;
   }
 }
+
+.hero-background-overlay {
+  width: 100%;
+  background-image: linear-gradient(to bottom,#0000 min(40vh,50%),#141519 100%),linear-gradient(to right,#000c 0,#0009 30%,#0000 70%);
+}

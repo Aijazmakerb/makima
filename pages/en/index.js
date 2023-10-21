@@ -20,6 +20,8 @@ import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
 
+import { BookmarkIcon, HeartIcon, PlayIcon } from "@heroicons/react/24/outline";
+
 import axios from "axios";
 
 export async function getServerSideProps() {
@@ -299,7 +301,7 @@ export default function Home({ detail, populars, upComing }) {
     {
       axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
     }
-    postData();
+    // postData();
   },[])
 
   return (
@@ -349,41 +351,37 @@ export default function Home({ detail, populars, upComing }) {
 
       <NewNavbar paddingY="pt-2 lg:pt-10" withNav={true} home={true} />
       <div className="h-auto w-screen bg-[#141519] text-[#dbdcdd]">
-        {/* PC / TABLET */}
-        <div className=" hidden justify-center lg:flex my-16">
-          <div className="relative grid grid-rows-2 items-center lg:flex lg:h-[467px] lg:w-[80%] lg:justify-between">
-            <div className="row-start-2 flex h-full flex-col gap-7 lg:w-[55%] lg:justify-center">
-              <h1 className="w-[85%] font-outfit font-extrabold lg:text-[34px] line-clamp-2">
-                {data.title.english || data.title.romaji || data.title.native}
-              </h1>
-              <p
-                className="font-roboto font-light lg:text-[18px] line-clamp-5"
-                dangerouslySetInnerHTML={{ __html: data?.description }}
-              />
+        {/* PC TABLET */}
+        <div className="hidden justify-center lg:flex">
+          <div className="absolute">
+            <Image
+              draggable={false}
+              src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/127230-o8IRwCGVr9KW.jpg"
+              width={1200}
+              height={1200}
+              className="object-cover w-screen h-[400px]"
+            />
+            <div className="hero-background-overlay h-[400px] absolute inset-0"></div>
+          </div>
 
-              <div className="lg:pt-5 flex">
-                <Link
-                  href={`/en/anime/${data.id}`}
-                  className="rounded-sm p-3 text-md font-karla font-light ring-1 ring-[#FF7F57]"
-                >
-                  START WATCHING
-                </Link>
+          <div className="z-[20] relative h-[400px] w-full lg:max-w-[90%]">
+            <div className="absolute bottom-0 gap-2 grid w-[38%] ml-5">
+              <h1 className="mb-4 font-medium text-5xl">Chainsaw Man</h1>
+              <span className="text-sm font-medium">TV Series • 12 Episodes • Fall 2022</span>
+              <p className="line-clamp-4 text-sm font-normal text-white/40">Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.</p>
+              <span className="text-sm font-medium">Action • Drama • Horror • Supernatural</span>
+              <div className="relative mt-2 gap-2 flex">
+                <Link href="/en/anime/127230"><button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button></Link>
+                <button className="bg-secondary p-2 rounded-sm"><HeartIcon className="w-4 h-4" /></button>
+                <button className="bg-secondary p-2 rounded-sm"><BookmarkIcon className="w-4 h-4" /></button>
               </div>
             </div>
-            <div className="z-10 row-start-1 flex justify-center ">
-              <div className="relative  lg:h-[467px] lg:w-[322px] lg:scale-100">
-                <div className="absolute bg-gradient-to-t from-[#141519] to-transparent lg:h-[467px] lg:w-[322px]" />
-
-                <Image
-                  draggable={false}
-                  src={data.coverImage?.extraLarge || data.image}
-                  alt={`cover ${data.title.english || data.title.romaji}`}
-                  width={1200}
-                  height={1200}
-                  priority
-                  className="rounded-tl-xl rounded-tr-xl object-cover bg-blend-overlay lg:h-[467px] lg:w-[322px]"
-                />
-              </div>
+            <div className="absolute align-center top-1/2 left-2/3 right-0">
+              <Link href="/en/anime/watch/127230/gogoanime?id=chainsaw-man-episode-1&num=1">
+                <button className="transition duration-300 p-2 rounded-full absolute left-3 top-1/2 md:block hover:bg-white hover:text-black border-solid border-2 border-white gap-x-2">
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" className="w-16 h-16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm144.1 454.9L437.7 677.8a8.02 8.02 0 0 1-12.7-6.5V353.7a8 8 0 0 1 12.7-6.5L656.1 506a7.9 7.9 0 0 1 0 12.9z"></path></svg>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -412,7 +410,7 @@ export default function Home({ detail, populars, upComing }) {
 
         <div className="lg:mt-16 mt-5 flex flex-col items-center">
           <motion.div
-            className="w-screen flex-none lg:w-[95%] xl:w-[87%]"
+            className="w-screen flex-none lg:w-[90%]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop
@@ -524,7 +522,7 @@ export default function Home({ detail, populars, upComing }) {
           </motion.div>
 
           <motion.div
-            className="w-screen flex-none lg:w-[95%] xl:w-[87%]"
+            className="w-screen flex-none lg:w-[90%]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, staggerChildren: 0.2 }} // Add staggerChildren prop
