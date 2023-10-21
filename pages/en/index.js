@@ -23,6 +23,7 @@ import { NewNavbar } from "@/components/shared/NavBar";
 import { BookmarkIcon, HeartIcon, PlayIcon } from "@heroicons/react/24/outline";
 
 import axios from "axios";
+import DotList from "@/components/shared/DotList";
 
 export async function getServerSideProps() {
   let cachedData;
@@ -304,6 +305,9 @@ export default function Home({ detail, populars, upComing }) {
     // postData();
   },[])
 
+  const upperData = ["TV Series", "12 Episodes", "Fall 2022"]
+  const lowerData = ["Action", "Drama", "Horror", "Supernatural"]
+
   return (
     <Fragment>
       <Head>
@@ -364,12 +368,12 @@ export default function Home({ detail, populars, upComing }) {
             <div className="hero-background-overlay h-[400px] absolute inset-0"></div>
           </div>
 
-          <div className="z-[20] relative h-[400px] w-full lg:max-w-[90%]">
+          <div className="z-[20] relative h-[400px] w-full lg:max-w-[90%] font-karla cursor-default">
             <div className="absolute bottom-0 gap-2 grid w-[38%] ml-5">
-              <h1 className="mb-4 font-medium text-5xl">Chainsaw Man</h1>
-              <span className="text-sm font-medium">TV Series • 12 Episodes • Fall 2022</span>
+              <h1 className="mb-2 font-extrabold font-outfit text-4xl uppercase">Chainsaw Man</h1>
+              <DotList children={upperData}/>
               <p className="line-clamp-4 text-sm font-normal text-white/40">Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.</p>
-              <span className="text-sm font-medium">Action • Drama • Horror • Supernatural</span>
+              <DotList children={lowerData}/>
               <div className="relative mt-2 gap-2 flex">
                 <Link href="/en/anime/127230"><button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button></Link>
                 <button className="bg-secondary p-2 rounded-sm"><HeartIcon className="w-4 h-4" /></button>
@@ -408,7 +412,7 @@ export default function Home({ detail, populars, upComing }) {
           </div>
         )}
 
-        <div className="lg:mt-16 mt-5 flex flex-col items-center">
+        <div className="lg:mt-10 mt-16 flex flex-col items-center">
           <motion.div
             className="w-screen flex-none lg:w-[90%]"
             initial={{ opacity: 0 }}
