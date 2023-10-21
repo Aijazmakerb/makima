@@ -20,10 +20,9 @@ import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
 
-import { BookmarkIcon, HeartIcon, PlayIcon } from "@heroicons/react/24/outline";
+import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/outline";
 
 import axios from "axios";
-import DotList from "@/components/shared/DotList";
 
 export async function getServerSideProps() {
   let cachedData;
@@ -302,11 +301,8 @@ export default function Home({ detail, populars, upComing }) {
     {
       axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
     }
-    // postData();
+    postData();
   },[])
-
-  const upperData = ["TV Series", "12 Episodes", "Fall 2022"]
-  const lowerData = ["Action", "Drama", "Horror", "Supernatural"]
 
   return (
     <Fragment>
@@ -371,9 +367,9 @@ export default function Home({ detail, populars, upComing }) {
           <div className="z-[20] relative h-[400px] w-full lg:max-w-[90%] font-karla cursor-default">
             <div className="absolute bottom-0 gap-2 grid w-[38%] ml-5">
               <h1 className="mb-2 font-extrabold font-outfit text-4xl uppercase">Chainsaw Man</h1>
-              <DotList children={upperData}/>
+              <span className="text-sm font-medium font-karla">TV Series <span className="text-white/50"> • </span> 12 Episodes <span className="text-white/50"> • </span> Fall 2022 </span>
               <p className="line-clamp-4 text-sm font-normal text-white/40">Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.</p>
-              <DotList children={lowerData}/>
+              <span className="text-sm font-medium font-karla">Action <span className="text-white/50"> • </span> Drama <span className="text-white/50"> • </span> Horror <span className="text-white/50"> • </span> Supernatural </span>
               <div className="relative mt-2 gap-2 flex">
                 <Link href="/en/anime/127230"><button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button></Link>
                 <button className="bg-secondary p-2 rounded-sm"><HeartIcon className="w-4 h-4" /></button>
