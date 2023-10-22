@@ -1,9 +1,7 @@
 import { aniListData } from "@/lib/anilist/AniList";
 import { useState, useEffect, Fragment } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import Footer from "@/components/shared/footer";
-import Image from "next/image";
 import Content from "@/components/home/content";
 
 import { motion } from "framer-motion";
@@ -20,10 +18,8 @@ import { getGreetings } from "@/utils/getGreetings";
 import { redis } from "@/lib/redis";
 import { NewNavbar } from "@/components/shared/NavBar";
 
-import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/outline";
-
 import axios from "axios";
-import DotList from "@/components/shared/DotList";
+import BannerArea from "@/components/home/bannerArea";
 
 export async function getServerSideProps() {
   let cachedData;
@@ -302,7 +298,7 @@ export default function Home({ detail, populars, upComing }) {
     {
       axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
     }
-    // postData();
+    postData();
   },[])
 
   const upperData = ["TV Series", "12 Episodes", "Fall 2022"]
@@ -356,43 +352,9 @@ export default function Home({ detail, populars, upComing }) {
 
       <NewNavbar paddingY="pt-2 lg:pt-10" withNav={true} home={true} />
       <div className="h-auto w-screen bg-[#141519] text-[#dbdcdd]">
-        {/* PC TABLET */}
-        <div className="hidden justify-center lg:flex h-[400px]">
-          <div className="absolute">
-            <Image
-              draggable={false}
-              src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/127230-o8IRwCGVr9KW.jpg"
-              width={1200}
-              height={1200}
-              className="object-cover h-[400px] w-screen"
-              alt="banner image"
-            />
-            <div className="hero-background-overlay absolute inset-0"></div>
-          </div>
 
-          <div className="relative w-full lg:max-w-[90%] font-karla">
-            <div className="absolute bottom-0 gap-1.5 grid w-[38%] ml-5">
-              <h1 className="mb-2 font-extrabold font-outfit text-4xl uppercase">Chainsaw Man</h1>
-              <DotList items={upperData}/>
-              <p className="line-clamp-4 text-sm font-normal text-white/40">{spotlightDescription}</p>
-              <DotList items={lowerData}/>
-              <div className="relative mt-2 gap-2 flex">
-                <Link href="/en/anime/127230">
-                  <button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button>
-                </Link>
-                <button className="bg-secondary p-2 rounded-sm"><HeartIcon className="w-4 h-4" /></button>
-                <button className="bg-secondary p-2 rounded-sm"><BookmarkIcon className="w-4 h-4" /></button>
-              </div>
-            </div>
-            <div className="absolute align-center top-1/2 left-2/3 right-0">
-              <Link href="/en/anime/watch/127230/gogoanime?id=chainsaw-man-episode-1&num=1">
-                <button className="transition duration-300 p-2 rounded-full absolute left-3 top-1/2 md:block hover:bg-white hover:text-black border-solid border-2 border-white gap-x-2">
-                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" className="w-16 h-16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm144.1 454.9L437.7 677.8a8.02 8.02 0 0 1-12.7-6.5V353.7a8 8 0 0 1 12.7-6.5L656.1 506a7.9 7.9 0 0 1 0 12.9z"></path></svg>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        {/* PC TABLET */}
+        <BannerArea upperData={upperData} lowerData={lowerData} description={spotlightDescription} data={data}/>
 
         {sessions && (
           <div className="flex items-center justify-center lg:bg-none mt-4 lg:mt-0 w-screen">
