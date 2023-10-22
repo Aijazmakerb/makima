@@ -352,7 +352,7 @@ export default function Watch({
         axios.get(`https://makima-mongo-api.vercel.app/save-data?table=player&id=${info.title.romaji || info.title.english} Episode: ${epiNumber}`)
       }
     }
-    postData();
+    // postData();
   },[info])
 
   return (

@@ -23,6 +23,7 @@ import { NewNavbar } from "@/components/shared/NavBar";
 import { BookmarkIcon, HeartIcon } from "@heroicons/react/24/outline";
 
 import axios from "axios";
+import DotList from "@/components/shared/DotList";
 
 export async function getServerSideProps() {
   let cachedData;
@@ -301,8 +302,12 @@ export default function Home({ detail, populars, upComing }) {
     {
       axios.get('https://makima-mongo-api.vercel.app/save-data?table=home');
     }
-    postData();
+    // postData();
   },[])
+
+  const upperData = ["TV Series", "12 Episodes", "Fall 2022"]
+  const lowerData = ["Action", "Drama", "Horror", "Supernatural"]
+  const spotlightDescription = "Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.";
 
   return (
     <Fragment>
@@ -352,26 +357,29 @@ export default function Home({ detail, populars, upComing }) {
       <NewNavbar paddingY="pt-2 lg:pt-10" withNav={true} home={true} />
       <div className="h-auto w-screen bg-[#141519] text-[#dbdcdd]">
         {/* PC TABLET */}
-        <div className="hidden justify-center lg:flex">
+        <div className="hidden justify-center lg:flex h-[400px]">
           <div className="absolute">
             <Image
               draggable={false}
               src="https://s4.anilist.co/file/anilistcdn/media/anime/banner/127230-o8IRwCGVr9KW.jpg"
               width={1200}
               height={1200}
-              className="object-cover w-screen h-[400px]"
+              className="object-cover h-[400px] w-screen"
+              alt="banner image"
             />
-            <div className="hero-background-overlay h-[400px] absolute inset-0"></div>
+            <div className="hero-background-overlay absolute inset-0"></div>
           </div>
 
-          <div className="z-[20] relative h-[400px] w-full lg:max-w-[90%] font-karla cursor-default">
-            <div className="absolute bottom-0 gap-2 grid w-[38%] ml-5">
+          <div className="relative w-full lg:max-w-[90%] font-karla">
+            <div className="absolute bottom-0 gap-1.5 grid w-[38%] ml-5">
               <h1 className="mb-2 font-extrabold font-outfit text-4xl uppercase">Chainsaw Man</h1>
-              <span className="text-sm font-medium font-karla">TV Series <span className="text-white/50"> • </span> 12 Episodes <span className="text-white/50"> • </span> Fall 2022 </span>
-              <p className="line-clamp-4 text-sm font-normal text-white/40">Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.</p>
-              <span className="text-sm font-medium font-karla">Action <span className="text-white/50"> • </span> Drama <span className="text-white/50"> • </span> Horror <span className="text-white/50"> • </span> Supernatural </span>
+              <DotList items={upperData}/>
+              <p className="line-clamp-4 text-sm font-normal text-white/40">{spotlightDescription}</p>
+              <DotList items={lowerData}/>
               <div className="relative mt-2 gap-2 flex">
-                <Link href="/en/anime/127230"><button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button></Link>
+                <Link href="/en/anime/127230">
+                  <button className="bg-secondary px-5 py-2 text-sm font-medium rounded-sm">Watch Now</button>
+                </Link>
                 <button className="bg-secondary p-2 rounded-sm"><HeartIcon className="w-4 h-4" /></button>
                 <button className="bg-secondary p-2 rounded-sm"><BookmarkIcon className="w-4 h-4" /></button>
               </div>

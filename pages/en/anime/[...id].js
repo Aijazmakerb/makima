@@ -91,7 +91,7 @@ export default function Info({ info, color }) {
     {
       axios.get(`https://makima-mongo-api.vercel.app/save-data?table=details&id=${info.title.english || info.title.romaji}`);
     }
-    postData();
+    // postData();
   },[])
 
   return (
